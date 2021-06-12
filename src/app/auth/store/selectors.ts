@@ -5,3 +5,8 @@ import { IAuthState } from '../types/auth-state.interface';
 export const authFeatureSelector = createFeatureSelector<IAppState, IAuthState>('auth');
 
 export const isSubmittingSelector = createSelector(authFeatureSelector, (authState: IAuthState) => authState.isSubmitting)
+
+export const validationErrors = createSelector(
+  authFeatureSelector,
+  (authState: IAuthState) => authState.validationErrors
+)
