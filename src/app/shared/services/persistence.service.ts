@@ -12,7 +12,7 @@ export class PersistenceService {
 
   get(key: string): any {
     try {
-      JSON.parse(localStorage.getItem(key));
+      return JSON.parse(localStorage.getItem(key));
     } catch (e) {
       console.error('Error getting from localstorage', e);
       return null;

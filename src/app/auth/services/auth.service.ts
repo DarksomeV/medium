@@ -8,6 +8,7 @@ import { ICurrentUser } from '../../shared/types/current-user.interface';
 import { environment } from '../../../environments/environment';
 import { IAuthResponse } from '../types/auth-response.interface';
 import { map } from 'rxjs/operators';
+import { ILoginRequest } from '../types/login-request.interface';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,31 @@ export class AuthService {
     return this._http
       .post<IAuthResponse>(url, data)
       .pipe(
-        map(({ user }: IAuthResponse) => user)
+        map(this.getUser)
       );
+  }
+
+  public login(data: ILoginRequest): Observable<ICurrentUser> {
+    const url = environment.apiUrl + '/users/login';
+
+    return this._http
+      .post<IAuthResponse>(url, data)
+      .pipe(
+        map(this.getUser)
+      );
+  }
+
+  public getCurrentUser(): Observable<ICurrentUser> {
+    const url = environment.apiUrl + '/user';
+
+    return this._http
+      .get<IAuthResponse>(url)
+      .pipe(
+        map(this.getUser)
+      );
+  }
+
+  private getUser(response: IAuthResponse) : ICurrentUser {
+    return response.user;
   }
 }
