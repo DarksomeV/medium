@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { TopBarModule } from './shared/components/top-bar/top-bar.module';
 import { PersistenceService } from './shared/services/persistence.service';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
+import { GlobalFeedModule } from './global-feed/global-feed.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthInterceptor } from './shared/services/auth-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    GlobalFeedModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
