@@ -1,7 +1,6 @@
 import { IAuthState } from '../types/auth-state.interface';
 import { Action, createReducer, on } from '@ngrx/store';
 import { registerAction, registerFailureAction, registerSuccessAction } from './actions/register.action';
-import { ICurrentUser } from '../../shared/types/current-user.interface';
 import { loginAction, loginFailureAction, loginSuccessAction } from './actions/login.action';
 import {
   getCurrentUserAction,

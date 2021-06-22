@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute, Params, Router } from "@angular/router";
 
 import { select, Store } from "@ngrx/store";
@@ -8,7 +8,7 @@ import { getFeedAction } from "./store/actions/get-feed.action";
 import { IGetFeedResponse } from "./types/get-feed-response.interface";
 import { errorSelector, feedSelector, isLoadingSelector } from "./store/selectors";
 import { environment } from "../../../../environments/environment";
-import {ParsedUrl, parseUrl, stringify} from "query-string";
+import { ParsedUrl, parseUrl, stringify } from "query-string";
 
 @Component({
   selector: 'mc-feed',

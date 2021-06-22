@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import {routerNavigationAction} from "@ngrx/router-store";
+import { routerNavigationAction } from "@ngrx/router-store";
 
 import { IFeedState } from "../types/feed-state.interface";
 import { getFeedAction, getFeedFailureAction, getFeedSuccessAction } from "./actions/get-feed.action";
@@ -10,7 +10,7 @@ const initialState: IFeedState = {
   isLoading: false,
   error: null,
   data: null,
-}
+};
 
 const feedReducer = createReducer(
   initialState,
