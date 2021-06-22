@@ -1,7 +1,9 @@
 import { Action, createReducer, on } from "@ngrx/store";
 
-import { IFeedState } from "./types/feed-state.interface";
-import { getFeedAction, getFeedFailureAction, getFeedSuccessAction } from "./store/actions/get-feed.action";
+import { IFeedState } from "../types/feed-state.interface";
+import { getFeedAction, getFeedFailureAction, getFeedSuccessAction } from "./actions/get-feed.action";
+
+
 
 const initialState: IFeedState = {
   isLoading: false,
@@ -21,7 +23,7 @@ const feedReducer = createReducer(
   on(getFeedSuccessAction, (state, action): IFeedState => {
     return {
       ...state,
-      isLoading: true,
+      isLoading: false,
       data: action.feed
     }
   }),
