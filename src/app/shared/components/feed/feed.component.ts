@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Params, Router } from "@angular/router";
 
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 
 import { getFeedAction } from "./store/actions/get-feed.action";
 import { IGetFeedResponse } from "./types/get-feed-response.interface";
 import { errorSelector, feedSelector, isLoadingSelector } from "./store/selectors";
 import { environment } from "../../../../environments/environment";
+import {ParsedUrl, parseUrl, stringify} from "query-string";
 
 @Component({
   selector: 'mc-feed',
@@ -23,7 +23,7 @@ export class FeedComponent implements OnInit {
   public feed$: Observable<IGetFeedResponse>;
   public limit: number = environment.limit;
   public baseUrl: string;
-  public currentPage$: Observable<number>;
+  public currentPage: number;
 
   constructor(
     private _store: Store,
@@ -33,7 +33,6 @@ export class FeedComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initObservables();
-    this.fetchFeed();
   }
 
   private initObservables(): void {
@@ -41,13 +40,24 @@ export class FeedComponent implements OnInit {
     this.error$ = this._store.pipe(select(errorSelector));
     this.feed$ = this._store.pipe(select(feedSelector));
     this.baseUrl = this._router.url.split('?')[0];
-    this.currentPage$ = this._route.queryParams.pipe(
-      map((params: Params) => Number(params.page || 1))
-    )
+    this._route.queryParams
+      .subscribe((params: Params) => {
+        this.currentPage = Number(params.page || 1);
+        this.fetchFeed()
+      })
   }
 
   private fetchFeed(): void {
-    this._store.dispatch(getFeedAction({url: this.apiUrl}));
+    const offset: number = this.currentPage * this.limit - this.limit;
+    const parsedUrl: ParsedUrl = parseUrl(this.apiUrl);
+    const stringifiedParams = stringify({
+      limit: this.limit,
+      offset,
+      ...parsedUrl.query
+    });
+    const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
+
+    this._store.dispatch(getFeedAction({url: apiUrlWithParams}));
   }
 
 }
