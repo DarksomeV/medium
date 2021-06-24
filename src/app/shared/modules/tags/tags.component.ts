@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from "rxjs";
-import { filter, map, tap } from "rxjs/operators";
+import { filter, map } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 
 import { IGetTagsResponse } from "./types/get-tags-response.interface";
@@ -35,9 +35,6 @@ export class TagsComponent implements OnInit {
       select(tagsSelector),
       filter(Boolean),
       map(({ tags }: IGetTagsResponse) => tags),
-      tap((res) => {
-        console.log(res)
-      })
     );
   }
 

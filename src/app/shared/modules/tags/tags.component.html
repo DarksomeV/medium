@@ -4,7 +4,7 @@
     <a
       *ngFor="let tag of tags"
       class="tag-default tag-pill"
-      [routerLink]="['/']"
+      [routerLink]="['/tags', tag]"
     > {{ tag }} </a>
   </div>
   <mc-loading *ngIf="isLoading$ | async"></mc-loading>
