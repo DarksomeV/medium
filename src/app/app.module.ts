@@ -15,6 +15,8 @@ import { TopBarModule } from './shared/components/top-bar/top-bar.module';
 import { PersistenceService } from './shared/services/persistence.service';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
 import { GlobalFeedModule } from './global-feed/global-feed.module';
+import { YourFeedModule } from './your-feed/your-feed.module';
+import { TagFeedModule } from './tag-feed/tag-feed.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,12 @@ import { GlobalFeedModule } from './global-feed/global-feed.module';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+
+    // todo: move to one container module and handle route changing. Not copy-paste modules
     GlobalFeedModule,
+    YourFeedModule,
+    TagFeedModule,
+
     StoreModule.forRoot({router: routerReducer}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
