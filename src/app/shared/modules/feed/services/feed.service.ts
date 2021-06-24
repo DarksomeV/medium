@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { IGetFeedResponse } from "../types/get-feed-response.interface";
-import { environment } from "../../../../../environments/environment";
+import { environment } from "@env/environment";
 
 @Injectable()
 export class FeedService {

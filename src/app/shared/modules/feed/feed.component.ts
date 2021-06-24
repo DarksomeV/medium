@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 import { getFeedAction } from "./store/actions/get-feed.action";
 import { IGetFeedResponse } from "./types/get-feed-response.interface";
 import { errorSelector, feedSelector, isLoadingSelector } from "./store/selectors";
-import { environment } from "../../../../environments/environment";
+import { environment } from "@env/environment";
 import { ParsedUrl, parseUrl, stringify } from "query-string";
 
 @Component({

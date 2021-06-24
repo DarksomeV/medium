@@ -4,8 +4,6 @@ import { routerNavigationAction } from "@ngrx/router-store";
 import { IFeedState } from "../types/feed-state.interface";
 import { getFeedAction, getFeedFailureAction, getFeedSuccessAction } from "./actions/get-feed.action";
 
-
-
 const initialState: IFeedState = {
   isLoading: false,
   error: null,
