@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
@@ -11,7 +11,14 @@ import { ErrorMessageModule } from '../shared/components/error-message/error-mes
 import { LoadingModule } from '../shared/components/loading/loading.module';
 import { ArticleService } from '../shared/services/article.service';
 import { GetArticleEffect } from './store/effects/get-article.effect';
+import { TagListModule } from '../shared/components/tag-list/tag-list.module';
 
+const routes: Routes = [
+  {
+    path: 'articles/:slug',
+    component: ArticleComponent,
+  }
+];
 
 @NgModule({
   declarations: [
@@ -24,9 +31,8 @@ import { GetArticleEffect } from './store/effects/get-article.effect';
     RouterModule,
     ErrorMessageModule,
     LoadingModule,
-  ],
-  exports: [
-    ArticleComponent,
+    RouterModule.forChild(routes),
+    TagListModule,
   ],
   providers: [
     ArticleService,
