@@ -12,6 +12,8 @@ import { LoadingModule } from '../shared/components/loading/loading.module';
 import { ArticleService } from '../shared/services/article.service';
 import { GetArticleEffect } from './store/effects/get-article.effect';
 import { TagListModule } from '../shared/components/tag-list/tag-list.module';
+import { ArticleSelfService } from './services/article-self.service';
+import { DeleteArticleEffect } from './store/effects/delete-article.effect';
 
 const routes: Routes = [
   {
@@ -26,7 +28,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    EffectsModule.forFeature([GetArticleEffect]),
+    EffectsModule.forFeature([GetArticleEffect, DeleteArticleEffect]),
     StoreModule.forFeature('article', reducers),
     RouterModule,
     ErrorMessageModule,
@@ -36,6 +38,7 @@ const routes: Routes = [
   ],
   providers: [
     ArticleService,
+    ArticleSelfService
   ]
 })
 export class ArticleModule {}

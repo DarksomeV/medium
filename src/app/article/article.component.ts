@@ -10,6 +10,7 @@ import { IArticle } from '../shared/types/article.interface';
 import { articleSelector, errorSelector, isLoadingSelector } from './store/selectors';
 import { currentUserSelector } from '../auth/store/selectors';
 import { ICurrentUser } from '../shared/types/current-user.interface';
+import { deleteArticleAction } from './store/actions/delete-article.action';
 
 @Component({
   selector: 'mc-article',
@@ -32,6 +33,10 @@ export class ArticleComponent implements OnInit {
   public ngOnInit(): void {
     this.initValues();
     this.fetchData();
+  }
+
+  public deleteArticle(): void {
+    this._store.dispatch(deleteArticleAction({ slug: this._slug }))
   }
 
   private fetchData(): void {
