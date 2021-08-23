@@ -9,7 +9,7 @@ import { CreateArticleComponent } from './create-article.component';
 import { ArticleFormModule } from '../shared/components/article-form/article-form.module';
 import { CreateArticleService } from './services/create-article.service';
 import { CreateArticleEffect } from './store/effects/create-article.effect';
-import { reducers } from '../article/store/reducers';
+import { reducers } from './store/reducers';
 
 const routes: Routes = [
   {

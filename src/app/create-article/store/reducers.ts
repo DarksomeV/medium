@@ -34,6 +34,6 @@ const createArticleReducer = createReducer(
   }),
 )
 
-export function reducer(state: ICreateArticleState, action: Action) {
+export function reducers(state: ICreateArticleState, action: Action) {
   return createArticleReducer(state, action)
 }
