@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
 import { IArticleInput } from '../shared/types/article-input.interface';
 import { IBackendErrors } from '../shared/types/backend-errors.interface';
 import { articleSelector, isLoadingSelector, isSubmittingSelector, validationErrorsSelector } from './store/selectors';
-import { ActivatedRoute } from '@angular/router';
 import { getArticleAction } from './store/actions/get-article.action';
-import { filter, map } from 'rxjs/operators';
 import { IArticle } from '../shared/types/article.interface';
 import { updateArticleAction } from './store/actions/update-article.action';
 
@@ -39,7 +39,8 @@ export class EditArticleComponent implements OnInit {
 
   private getArticle(): void {
     const slug = this._route.snapshot.paramMap.get('slug');
-    this._store.dispatch(getArticleAction({slug}))
+
+    this._store.dispatch(getArticleAction({ slug }))
   }
 
   private initObservables(): void {

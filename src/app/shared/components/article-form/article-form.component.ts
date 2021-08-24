@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { IArticleInput } from '../../types/article-input.interface';
 import { IBackendErrors } from '../../types/backend-errors.interface';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'mc-article-form',

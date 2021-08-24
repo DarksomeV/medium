@@ -1,4 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
+
 import { IEditArticleState } from '../types/edit-article-state.interface';
 import {
   updateArticleAction,

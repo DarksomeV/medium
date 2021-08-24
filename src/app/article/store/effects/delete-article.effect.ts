@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
@@ -10,7 +11,6 @@ import {
   deleteArticleFailureAction,
   deleteArticleSuccessAction
 } from '../actions/delete-article.action';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class DeleteArticleEffect {

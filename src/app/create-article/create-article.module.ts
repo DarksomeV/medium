@@ -33,4 +33,4 @@ const routes: Routes = [
     CreateArticleService,
   ]
 })
-export class CreateArticleModule { }
+export class CreateArticleModule {}
