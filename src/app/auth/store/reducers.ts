@@ -8,6 +8,7 @@ import {
   getCurrentUserSuccessAction
 } from './actions/get-current-user.action';
 import { updateCurrentUserSuccessAction } from './actions/update-current-user.action';
+import { logoutAction } from './actions/sync.action';
 
 const initialState: IAuthState = {
   isSubmitting: false,
@@ -98,6 +99,13 @@ const authReducer = createReducer(
     return {
       ...state,
       currentUser: action.currentUser,
+    }
+  }),
+
+  on(logoutAction, (): IAuthState => {
+    return {
+      ...initialState,
+      isLoggedIn: false,
     }
   })
 )
