@@ -20,6 +20,7 @@ import { TagFeedModule } from './tag-feed/tag-feed.module';
 import { ArticleModule } from './article/article.module';
 import { CreateArticleModule } from './create-article/create-article.module';
 import { EditArticleModule } from './edit-article/edit-article.module';
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EditArticleModule } from './edit-article/edit-article.module';
     CreateArticleModule,
     EditArticleModule,
     ArticleModule,
+    SettingsModule,
 
     // todo: move to one container module and handle route changing. Not copy-paste modules
     GlobalFeedModule,
