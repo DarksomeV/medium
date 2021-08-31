@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { IRegisterRequest } from '../types/register-request.interface';
 import { ICurrentUser } from '../../shared/types/current-user.interface';
 import { environment } from '../../../environments/environment';
 import { IAuthResponse } from '../types/auth-response.interface';
-import { map } from 'rxjs/operators';
 import { ILoginRequest } from '../types/login-request.interface';
+import { ICurrentUserInput } from '../../shared/types/current-user-input.interface';
 
 @Injectable()
 export class AuthService {
@@ -42,6 +43,16 @@ export class AuthService {
 
     return this._http
       .get<IAuthResponse>(url)
+      .pipe(
+        map(this.getUser)
+      );
+  }
+
+  public updateCurrentUser(currentUserInput: ICurrentUserInput): Observable<ICurrentUser> {
+    const url = environment.apiUrl + '/user';
+
+    return this._http
+      .put<IAuthResponse>(url, currentUserInput)
       .pipe(
         map(this.getUser)
       );

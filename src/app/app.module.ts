@@ -9,7 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
-import { environment } from '../environments/environment';
+import { environment } from '@env/environment';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TopBarModule } from './shared/components/top-bar/top-bar.module';
 import { PersistenceService } from './shared/services/persistence.service';
@@ -20,6 +20,8 @@ import { TagFeedModule } from './tag-feed/tag-feed.module';
 import { ArticleModule } from './article/article.module';
 import { CreateArticleModule } from './create-article/create-article.module';
 import { EditArticleModule } from './edit-article/edit-article.module';
+import { SettingsModule } from './settings/settings.module';
+import { UserProfileModule } from './user-profile/user-profile.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { EditArticleModule } from './edit-article/edit-article.module';
     CreateArticleModule,
     EditArticleModule,
     ArticleModule,
+    SettingsModule,
+    UserProfileModule,
 
     // todo: move to one container module and handle route changing. Not copy-paste modules
     GlobalFeedModule,
