@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 import { IProfile } from '../../../shared/types/profile.interface';
@@ -23,8 +23,7 @@ export class UserProfileComponent implements OnInit {
   public isCurrentUser$: Observable<boolean>;
   public apiUrl$: Observable<string>;
 
-  private _slug: string;
-  private _apiUrlSubject: Subject<string> = new Subject<string>();
+  private _apiUrlSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(
     private _store: Store,
@@ -64,9 +63,12 @@ export class UserProfileComponent implements OnInit {
 
   private initListeners(): void {
     this._route.params
-      .subscribe(({ slug }: Params) => {
-        this._apiUrlSubject.next(slug)
-        this.fetchUserProfile(slug)
+      .pipe(
+        filter(Boolean),
+      )
+      .subscribe((params: Params) => {
+        this._apiUrlSubject.next(params.slug)
+        this.fetchUserProfile(params.slug)
       })
   }
 
