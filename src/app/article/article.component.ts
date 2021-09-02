@@ -20,6 +20,7 @@ import {
 import { FormControl } from '@angular/forms';
 import { IComment } from '../shared/types/comment.interface';
 import { addCommentAction } from '../comments/store/actions/add-comment.action';
+import { deleteCommentAction } from '../comments/store/actions/delete-comment.action';
 
 @Component({
   selector: 'mc-article',
@@ -32,6 +33,8 @@ export class ArticleComponent implements OnInit {
   public isLoading$: Observable<boolean>;
   public error$: Observable<string>;
   public isAuthor$: Observable<boolean>;
+  public currentUser$: Observable<ICurrentUser>;
+
   public commentControl = new FormControl();
 
   private _slug: string;
@@ -58,6 +61,10 @@ export class ArticleComponent implements OnInit {
     this._store.dispatch(addCommentAction({ articleSlug: this._slug, body: this.commentControl.value }))
   }
 
+  public removeComment(id: number): void {
+    this._store.dispatch(deleteCommentAction({ articleSlug: this._slug, id }));
+  }
+
   private fetchData(): void {
     this._store.dispatch(getArticleAction({ slug: this._slug }))
     this._store.dispatch(getCommentsAction({ articleSlug: this._slug }))
@@ -69,6 +76,7 @@ export class ArticleComponent implements OnInit {
     this.comments$ = this._store.pipe(select(commentsSelector))
     this.isLoading$ = this._store.pipe(select(isLoadingSelector));
     this.error$ = this._store.pipe(select(errorSelector));
+    this.currentUser$ = this._store.pipe(select(currentUserSelector));
     this.isAuthor$ = combineLatest([
       this.article$,
       this._store.pipe(select(currentUserSelector)),

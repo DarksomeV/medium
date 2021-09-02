@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { IComment } from '../../types/comment.interface';
 
 @Component({
@@ -6,12 +7,12 @@ import { IComment } from '../../types/comment.interface';
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnInit {
-  @Input() comment: IComment;
+export class CommentComponent {
+  @Input() public comment: IComment;
 
-  constructor() { }
+  @Output() public deleteComment: EventEmitter<number> = new EventEmitter<number>();
 
-  ngOnInit(): void {
+  deleteClicked() {
+    this.deleteComment.emit(this.comment.id);
   }
-
 }

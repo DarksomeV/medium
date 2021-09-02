@@ -49,8 +49,7 @@
                 ></textarea>
               </div>
               <div class="card-footer">
-<!--                <img [src]="currentUser.image" class="comment-author-img" />-->
-                CURRENT USER IMAGE
+                <img *ngIf="currentUser$ | async as currentUser" [src]="currentUser.image" class="comment-author-img"/>
                 <button class="btn btn-sm btn-primary" type="submit">
                   Post Comment
                 </button>
@@ -63,6 +62,7 @@
         <mc-comment
           *ngFor="let comment of (comments$ | async)"
           [comment]="comment"
+          (deleteComment)="removeComment($event)"
         ></mc-comment>
       </div>
     </div>

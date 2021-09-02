@@ -32,6 +32,13 @@ export class CommentsService {
       )
   }
 
+  public deleteComment(articleSlug: string, id: number): Observable<void> {
+    const fullUrl: string = `${CommentsService.getCommentsUrl(articleSlug)}/${id}`;
+
+    return this._http
+      .delete<void>(fullUrl)
+  }
+
   private static getCommentsUrl(articleSlug: string): string {
     return `${environment.apiUrl}/articles/${articleSlug}/comments`;
   }

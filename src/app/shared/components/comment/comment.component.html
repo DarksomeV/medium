@@ -15,9 +15,8 @@
     <span class="date-posted">
       {{ comment.createdAt | date: 'longDate' }}
     </span>
-    DELETE HERE
-<!--    <span class="mod-options" [hidden]="!canModify">-->
-<!--      <i class="ion-trash-a" (click)="deleteClicked()"></i>-->
-<!--    </span>-->
+    <span class="mod-options">
+      <i class="ion-trash-a" (click)="deleteClicked()"></i>
+    </span>
   </div>
 </div>

@@ -6,4 +6,8 @@ export enum ActionTypes {
   ADD_COMMENT = '[Comments] Add Comment',
   ADD_COMMENT_SUCCESS = '[Comments] Add Comment Success',
   ADD_COMMENT_FAILURE = '[Comments] Add Comment Failed',
+
+  DELETE_COMMENT = '[Comments] Delete Comment',
+  DELETE_COMMENT_SUCCESS = '[Comments] Delete Comment Success',
+  DELETE_COMMENT_FAILURE = '[Comments] Delete Comment Failed',
 }

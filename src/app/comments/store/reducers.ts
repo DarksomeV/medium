@@ -4,6 +4,11 @@ import { routerNavigationAction } from "@ngrx/router-store";
 import { ICommentsState } from '../types/comments-state.interface';
 import { getCommentsAction, getCommentsFailureAction, getCommentsSuccessAction } from './actions/get-comments.action';
 import { addCommentAction, addCommentFailureAction, addCommentSuccessAction } from './actions/add-comment.action';
+import {
+  deleteCommentAction,
+  deleteCommentFailureAction,
+  deleteCommentSuccessAction
+} from './actions/delete-comment.action';
 
 const initialState: ICommentsState = {
   isLoading: false,
@@ -51,6 +56,28 @@ const commentsReducer = createReducer(
   }),
 
   on(addCommentFailureAction, (state): ICommentsState => {
+    return {
+      ...state,
+      isLoading: false,
+    }
+  }),
+
+  on(deleteCommentAction, (state): ICommentsState => {
+    return {
+      ...state,
+      isLoading: true,
+    }
+  }),
+
+  on(deleteCommentSuccessAction, (state, action): ICommentsState => {
+    return {
+      ...state,
+      data: state.data.filter(({ id }) => id !== action.id),
+      isLoading: false,
+    }
+  }),
+
+  on(deleteCommentFailureAction, (state): ICommentsState => {
     return {
       ...state,
       isLoading: false,
