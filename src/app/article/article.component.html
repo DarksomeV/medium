@@ -33,5 +33,39 @@
         <mc-tag-list [tags]="article.tagList"></mc-tag-list>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        ADD AUTH CONDITION
+        <div>
+          <form class="card comment-form" (ngSubmit)="addComment()">
+            <fieldset [disabled]="false">
+              <div class="card-block">
+                <textarea
+                  class="form-control"
+                  placeholder="Write a comment..."
+                  rows="3"
+                  [formControl]="commentControl"
+                ></textarea>
+              </div>
+              <div class="card-footer">
+                <img *ngIf="currentUser$ | async as currentUser" [src]="currentUser.image" class="comment-author-img"/>
+                <button class="btn btn-sm btn-primary" type="submit">
+                  Post Comment
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <mc-comment
+          *ngFor="let comment of (comments$ | async)"
+          [comment]="comment"
+          (deleteComment)="removeComment($event)"
+        ></mc-comment>
+      </div>
+    </div>
+
   </div>
 </div>

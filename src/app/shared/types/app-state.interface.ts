@@ -5,6 +5,7 @@ import { IArticleState } from '../../article/types/article-state.interface';
 import { ICreateArticleState } from '../../create-article/types/create-article-state.interface';
 import { IEditArticleState } from '../../edit-article/types/edit-article-state.interface';
 import { IUserProfileState } from '../../user-profile/types/user-profile-state.interface';
+import { ICommentsState } from '../../comments/types/comments-state.interface';
 
 export interface IAppState {
   auth: IAuthState;
@@ -14,4 +15,5 @@ export interface IAppState {
   createArticle: ICreateArticleState;
   editArticle: IEditArticleState;
   userProfile: IUserProfileState;
+  comments: ICommentsState;
 }

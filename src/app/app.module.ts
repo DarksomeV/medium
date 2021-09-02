@@ -22,10 +22,11 @@ import { CreateArticleModule } from './create-article/create-article.module';
 import { EditArticleModule } from './edit-article/edit-article.module';
 import { SettingsModule } from './settings/settings.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
+import { CommentsModule } from './comments/comments.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     HttpClientModule,
@@ -37,6 +38,7 @@ import { UserProfileModule } from './user-profile/user-profile.module';
     ArticleModule,
     SettingsModule,
     UserProfileModule,
+    CommentsModule,
 
     // todo: move to one container module and handle route changing. Not copy-paste modules
     GlobalFeedModule,

@@ -11,6 +11,16 @@ import { articleSelector, errorSelector, isLoadingSelector } from './store/selec
 import { currentUserSelector } from '../auth/store/selectors';
 import { ICurrentUser } from '../shared/types/current-user.interface';
 import { deleteArticleAction } from './store/actions/delete-article.action';
+import { getCommentsAction } from '../comments/store/actions/get-comments.action';
+import {
+  commentsSelector,
+  isLoadingSelector as isLoadingCommentsSelector,
+  errorSelector as errorCommentsSelector
+} from '../comments/store/selectors';
+import { FormControl } from '@angular/forms';
+import { IComment } from '../shared/types/comment.interface';
+import { addCommentAction } from '../comments/store/actions/add-comment.action';
+import { deleteCommentAction } from '../comments/store/actions/delete-comment.action';
 
 @Component({
   selector: 'mc-article',
@@ -19,9 +29,13 @@ import { deleteArticleAction } from './store/actions/delete-article.action';
 })
 export class ArticleComponent implements OnInit {
   public article$: Observable<IArticle>;
+  public comments$: Observable<IComment[]>;
   public isLoading$: Observable<boolean>;
   public error$: Observable<string>;
   public isAuthor$: Observable<boolean>;
+  public currentUser$: Observable<ICurrentUser>;
+
+  public commentControl = new FormControl();
 
   private _slug: string;
 
@@ -39,15 +53,30 @@ export class ArticleComponent implements OnInit {
     this._store.dispatch(deleteArticleAction({ slug: this._slug }))
   }
 
+  public addComment(): void {
+    if (!this.commentControl.value) {
+      return;
+    }
+
+    this._store.dispatch(addCommentAction({ articleSlug: this._slug, body: this.commentControl.value }))
+  }
+
+  public removeComment(id: number): void {
+    this._store.dispatch(deleteCommentAction({ articleSlug: this._slug, id }));
+  }
+
   private fetchData(): void {
-    this._store.dispatch(getArticleAction({slug: this._slug}))
+    this._store.dispatch(getArticleAction({ slug: this._slug }))
+    this._store.dispatch(getCommentsAction({ articleSlug: this._slug }))
   }
 
   private initValues(): void {
     this._slug = this._route.snapshot.paramMap.get('slug');
     this.article$ = this._store.pipe(select(articleSelector));
+    this.comments$ = this._store.pipe(select(commentsSelector))
     this.isLoading$ = this._store.pipe(select(isLoadingSelector));
     this.error$ = this._store.pipe(select(errorSelector));
+    this.currentUser$ = this._store.pipe(select(currentUserSelector));
     this.isAuthor$ = combineLatest([
       this.article$,
       this._store.pipe(select(currentUserSelector)),
